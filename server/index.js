@@ -11,7 +11,15 @@ app.post('/repos', function (req, res) {
   console.log('INSIDE POST' , Object.keys(req.body)[0]);
   // res.send('TEST');
   // res.end();
-  helpers.getReposByUsername(Object.keys(req.body)[0]);
+  helpers.getReposByUsername(Object.keys(req.body)[0])
+  .then(data => {
+    for (let i = 0; i < data.length; i++) {
+      console.log('DATA RECEIVED:', data[i].id)
+    }
+  })
+  .catch(error => {
+    console.log('ERROR POSTING REPOS:', error);
+  })
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
