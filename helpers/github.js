@@ -9,14 +9,12 @@ let getReposByUsername = (username) => {
   // The options object has been provided to help you out,
   // but you'll have to fill in the URL
   let options = {
-
-    //url: 'https://api.github.com/users/JordanAce',
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
     }
   };
-  axios.get(`https://api.github.com/users/${username}`, options)
+  axios.get(`https://api.github.com/users/${username}/repos`, options)
   .then((response) => {
     console.log('USERS GITHUB:', response.data);
   })
