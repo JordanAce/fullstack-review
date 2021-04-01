@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost/repos');
+
+
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
   id: Number,
   name: String,
   full_name: String,
-  owner: {
-    username: String,
-    userid: Number,
-    link: String
-  },
+  owner: Object,
   watchers: Number,
   created_at: Date,
   updated_at: Date,
@@ -18,13 +16,31 @@ let repoSchema = mongoose.Schema({
   description: String
 });
 
-let Repo = mongoose.model('Repo', repoSchema);
+let uniqueRepoIds = [];
+let Repo = mongoose.model('repos', repoSchema);
+// TODO: Your code here
+// This function should save a repo or repos to
+// the MongoDB
+mongoose.connect('mongodb://localhost:1128/repos', {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology:true
+});
 
-let save = (repoSchema) => {
+let save = (userRepo) => {
+   if (!uniqueRepoIds.includes(userRepo.id)) {
+     uniqueRepoIds.push(userRepo.id)
+     Repo.create(userRepo)
+    .then((response) => {
 
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
+      console.log(response + ' ADDED TO THE DATABASE')
+    })
+    .catch((err) => {
+      console.log('ERROR ADDING ' + Repo + ' TO THE DATABASE')
+    })
+   } else {
+     console.log('DUPLICATE ENTRY')
+   }
 }
 
 module.exports.save = save;

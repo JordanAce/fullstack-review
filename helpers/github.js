@@ -19,7 +19,7 @@ let getReposByUsername = (username) => {
     for (var key in response.data) {
       userRepos.push(response.data[key]);
     }
-    console.log(userRepos);
+    //console.log(userRepos);
     return userRepos;
   })
   .catch((error) => {

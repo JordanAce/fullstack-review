@@ -2,18 +2,19 @@ const express = require('express');
 let app = express();
 const helpers = require('../helpers/github.js')
 const bodyParser = require('body-parser');
+const db = require('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/repos', function (req, res) {
-  console.log('INSIDE POST' , Object.keys(req.body)[0]);
-  // res.send('TEST');
-  // res.end();
-  helpers.getReposByUsername(Object.keys(req.body)[0])
+  let currentUser = Object.keys(req.body)[0]
+  console.log('INSIDE POST');
+  helpers.getReposByUsername(currentUser)
   .then(data => {
     for (let i = 0; i < data.length; i++) {
+      db.save(data[i]);
       console.log('DATA RECEIVED:', data[i].id)
     }
   })
