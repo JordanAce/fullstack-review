@@ -44,9 +44,6 @@ class App extends React.Component {
         that.setState({
           repos: sortedRepos
         });
-          sortedRepos.forEach(repo => {
-          console.log(repo);
-        })
       },
       error: function() {
         console.log('ERROR GETTING TOP 25 REPOS')

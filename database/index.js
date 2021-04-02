@@ -37,7 +37,7 @@ let save = (userRepo) => {
      }
 
 let find = () => {
-  return Repo.find().sort({'watchers': -1}).limit(3).exec(function(err, list) {
+  return Repo.find().sort({'watchers': -1}).limit(25).exec(function(err, list) {
     if (err) {
       throw err;
     }
