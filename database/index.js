@@ -37,11 +37,12 @@ let save = (userRepo) => {
      }
 
 let find = () => {
-  return Repo.find().sort({'watchers': -1}).limit(10).exec(function(err, list) {
-    console.log(list.length);
+  return Repo.find().sort({'watchers': -1}).limit(3).exec(function(err, list) {
+    if (err) {
+      throw err;
+    }
   })
   .then((sortedRepos) => {
-    console.log('SORTED REPOS:', sortedRepos)
       return sortedRepos;
   })
   .catch((error) =>

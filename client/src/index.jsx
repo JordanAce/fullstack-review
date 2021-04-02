@@ -12,9 +12,7 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
-
   }
-
   search (handle) {
     console.log(`${handle} was searched`);
     //POST REQUEST TO /REPOS
@@ -24,7 +22,10 @@ class App extends React.Component {
       dataType: "json",
       data: handle,
       success: function(data) {
-        this.state.repos.push[data];
+        console.log(data);
+        this.setState({
+          repos: data
+        });
       },
       error: function () {
         console.log('ERROR ON POST REQUEST');
@@ -33,18 +34,26 @@ class App extends React.Component {
   }
 
 
-  componentDidMount(repos) {
+  componentDidMount() {
+    let that = this;
     $.ajax({
       type: 'GET',
       url: ('/repos'),
-      success: function(repos) {
-        console.log('GETTING TOP 25 REPOS:', repos.model._doc)
+      success: function(sortedRepos) {
+        console.log('SORTED REPOS OBTAINED BY CLIENT:', sortedRepos);
+        that.setState({
+          repos: sortedRepos
+        });
+          sortedRepos.forEach(repo => {
+          console.log(repo);
+        })
       },
       error: function() {
         console.log('ERROR GETTING TOP 25 REPOS')
       }
-    })
-  }
+    });
+  };
+
   render () {
     return (<div>
       <h1>Github Fetcher</h1>

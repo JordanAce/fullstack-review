@@ -29,11 +29,10 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  db.find()
-  .then((res) => {
-    for (let i = 0; i < res.length; i++) {
-      return res[i].model._doc
-    }
+  return db.find()
+  .then((sortedRepos) => {
+    console.log('SORTED REPOS SENT BACK TO SERVER:', sortedRepos);
+    res.send(sortedRepos);
   })
   .catch(error => {
     console.log('ERROR ON REFRESH:', error)
