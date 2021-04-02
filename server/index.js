@@ -4,7 +4,6 @@ const helpers = require('../helpers/github.js')
 const bodyParser = require('body-parser');
 const db = require('../database/index.js');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/repos');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -30,12 +29,19 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
+  db.find()
+  .then((response) => {
+    console.log(response)
+  });
+
+  // mongoose.connect('mongodb://localhost/repos');
+  // let myRepos = mongoose.model('repos', db.repoSchema);
+  // console.log('GETTING REPOS FROM DATABASE:', myRepos.find({}).sort({watchers: -1}));
+  // });
 
     // TODO - your code here!
     // This route should send back the top 25 repos
-  });
-
-
+});
 let port = 1128;
 
 

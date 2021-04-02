@@ -36,4 +36,16 @@ let save = (userRepo) => {
     })
      }
 
+let find = () => {
+  return Repo.find()
+  .then((repos) => {
+    return repos.model
+  })
+  .catch((error) =>
+  {
+    console.log('ERROR ON REFRESH:', error)
+  })
+}
+module.exports.repo = Repo;
 module.exports.save = save;
+module.exports.find = find;

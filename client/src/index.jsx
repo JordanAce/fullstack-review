@@ -32,10 +32,19 @@ class App extends React.Component {
     })
   }
 
-  // componentDidMount() {
-  //   return this.state.repos;
-  // }
 
+  componentDidMount(repos) {
+    $.ajax({
+      type: 'GET',
+      url: ('/repos'),
+      success: function(repos) {
+        console.log('GETTING TOP 25 REPOS:', repos.model._doc)
+      },
+      error: function() {
+        console.log('ERROR GETTING TOP 25 REPOS')
+      }
+    })
+  }
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
