@@ -30,14 +30,14 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   db.find()
-  .then((response) => {
-    console.log(response)
-  });
-
-  // mongoose.connect('mongodb://localhost/repos');
-  // let myRepos = mongoose.model('repos', db.repoSchema);
-  // console.log('GETTING REPOS FROM DATABASE:', myRepos.find({}).sort({watchers: -1}));
-  // });
+  .then((res) => {
+    for (let i = 0; i < res.length; i++) {
+      return res[i].model._doc
+    }
+  })
+  .catch(error => {
+    console.log('ERROR ON REFRESH:', error)
+  })
 
     // TODO - your code here!
     // This route should send back the top 25 repos

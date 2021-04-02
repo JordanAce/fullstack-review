@@ -37,9 +37,12 @@ let save = (userRepo) => {
      }
 
 let find = () => {
-  return Repo.find()
-  .then((repos) => {
-    return repos.model
+  return Repo.find().sort({'watchers': -1}).limit(10).exec(function(err, list) {
+    console.log(list.length);
+  })
+  .then((sortedRepos) => {
+    console.log('SORTED REPOS:', sortedRepos)
+      return sortedRepos;
   })
   .catch((error) =>
   {
