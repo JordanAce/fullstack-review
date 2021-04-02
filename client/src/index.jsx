@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+const mongoose = require('mongoose');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class App extends React.Component {
       dataType: "json",
       data: handle,
       success: function(data) {
-        console.log('SUCCESS ON POST REQUEST');
+        this.state.repos.push[data];
       },
       error: function () {
         console.log('ERROR ON POST REQUEST');
@@ -30,9 +32,9 @@ class App extends React.Component {
     })
   }
 
-
-
-
+  // componentDidMount() {
+  //   return this.state.repos;
+  // }
 
   render () {
     return (<div>
