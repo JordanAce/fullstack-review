@@ -22,6 +22,7 @@ app.post('/repos', function (req, res) {
       db.save(data[i]);
       console.log('DATA RECEIVED:', data[i].id)
     }
+    return data;
   })
   .catch(error => {
     console.log('ERROR POSTING REPOS:', error);

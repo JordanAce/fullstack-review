@@ -22,7 +22,7 @@ class App extends React.Component {
       dataType: "json",
       data: handle,
       success: function(data) {
-        console.log(data);
+        console.log('INSIDE POST SUCCESS');
         this.setState({
           repos: data
         });

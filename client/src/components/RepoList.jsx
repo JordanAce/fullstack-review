@@ -10,15 +10,16 @@ const RepoList = (props) => (
       <th>Creator</th>
       <th>Watchers</th>
     </tr>
-    {props.repos.map((repo, id) => {
+    {props.repos.map((repo, key) => {
+      console.log(repo.html_url);
       return(
-        <tr>
-          <td key = {repo.id}><a href={repo.url}>{repo.name}</a></td>
-          <td key = {repo.id}>{repo.owner.login}</td>
-          <td key = {repo.id}>{repo.watchers}</td>
+        <tr key = {repo.id}>
+          <td><a href={repo.html_url}>{repo.name}</a></td>
+          <td>{repo.owner.login}</td>
+          <td>{repo.watchers}</td>
         </tr>
         )
-    })}</tbody></table>
+    })}</tbody></table><br></br>
     There are {props.repos.length} repos.
   </div>
 )

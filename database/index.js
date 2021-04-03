@@ -5,14 +5,14 @@ mongoose.connect('mongodb://localhost/repos');
 
 let repoSchema = new mongoose.Schema({
   // TODO: your schema here!
-  id: {type : Number,unique: true},
+  id: {type : Number, unique: true},
   name: String,
   full_name: String,
   owner: Object,
   watchers: Number,
   created_at: Date,
   updated_at: Date,
-  hrml_url: String,
+  html_url: String,
   description: String
 });
 
@@ -29,7 +29,8 @@ mongoose.connect('mongodb://localhost:1128/repos', {
 let save = (userRepo) => {
      Repo.create(userRepo)
     .then((response) => {
-      console.log(response + ' ADDED TO THE DATABASE')
+      return response;
+      console.log('REPOS ADDED TO THE DATABASE')
     })
     .catch((err) => {
       console.log('DUPLICATE ENTRY TO THE DATABASE')
