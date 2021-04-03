@@ -2,12 +2,15 @@ const express = require('express');
 let app = express();
 const helpers = require('../helpers/github.js')
 const bodyParser = require('body-parser');
+const Promise = require('bluebird');
 const db = require('../database/index.js');
 const mongoose = require('mongoose');
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+Promise.promisify(db.save);
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!
@@ -18,16 +21,24 @@ app.post('/repos', function (req, res) {
   console.log('INSIDE POST');
   helpers.getReposByUsername(currentUser)
   .then(data => {
+    return new Promise((resolve, reject) => {
     for (let i = 0; i < data.length; i++) {
-      db.save(data[i]);
+      resolve(db.save(data[i]));
       console.log('DATA RECEIVED:', data[i].id)
     }
-    return data;
+  })
+  .then(() => {
+    return db.find()
+  })
+  .then((sortedRepos) => {
+    console.log('SORTED REPOS SENT BACK TO SERVER:', sortedRepos);
+    res.send(sortedRepos);
   })
   .catch(error => {
     console.log('ERROR POSTING REPOS:', error);
   })
 });
+})
 
 app.get('/repos', function (req, res) {
   return db.find()

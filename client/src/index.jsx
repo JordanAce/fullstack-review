@@ -14,6 +14,7 @@ class App extends React.Component {
     }
   }
   search (handle) {
+    let that = this;
     console.log(`${handle} was searched`);
     //POST REQUEST TO /REPOS
     $.ajax({
@@ -22,8 +23,8 @@ class App extends React.Component {
       dataType: "json",
       data: handle,
       success: function(data) {
-        console.log('INSIDE POST SUCCESS');
-        this.setState({
+        console.log(data);
+        that.setState({
           repos: data
         });
       },

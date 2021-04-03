@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/repos');
 
 
@@ -26,16 +27,16 @@ mongoose.connect('mongodb://localhost:1128/repos', {
   useUnifiedTopology:true
 });
 
-let save = (userRepo) => {
+let save = ((userRepo) => {
      Repo.create(userRepo)
     .then((response) => {
-      return response;
       console.log('REPOS ADDED TO THE DATABASE')
     })
     .catch((err) => {
       console.log('DUPLICATE ENTRY TO THE DATABASE')
     })
-     }
+})
+
 
 let find = () => {
   return Repo.find().sort({'watchers': -1}).limit(25).exec(function(err, list) {
