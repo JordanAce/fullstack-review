@@ -22,13 +22,15 @@ app.post('/repos', function (req, res) {
   helpers.getReposByUsername(currentUser)
   .then(data => {
     return new Promise((resolve, reject) => {
-    for (let i = 0; i < data.length; i++) {
-      resolve(db.save(data[i]));
-      console.log('DATA RECEIVED:', data[i].id)
-    }
+       resolve(db.save(data));
+    // for (let i = 0; i < data.length; i++) {
+    //   resolve(db.save(data[i]));
+    //   console.log('DATA RECEIVED:', data[i].id)
+    })
   })
   .then(() => {
-    return db.find()
+      console.log('CALLING DB FIND')
+      return db.find()
   })
   .then((sortedRepos) => {
     console.log('SORTED REPOS SENT BACK TO SERVER:', sortedRepos);
@@ -38,7 +40,7 @@ app.post('/repos', function (req, res) {
     console.log('ERROR POSTING REPOS:', error);
   })
 });
-})
+
 
 app.get('/repos', function (req, res) {
   return db.find()

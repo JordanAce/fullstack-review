@@ -28,8 +28,8 @@ class App extends React.Component {
           repos: data
         });
       },
-      error: function () {
-        console.log('ERROR ON POST REQUEST');
+      error: function (error) {
+        console.log('ERROR ON POST REQUEST', error);
       }
     })
   }

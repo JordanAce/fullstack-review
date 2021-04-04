@@ -11,7 +11,6 @@ const RepoList = (props) => (
       <th>Watchers</th>
     </tr>
     {props.repos.map((repo, key) => {
-      console.log(repo.html_url);
       return(
         <tr key = {repo.id}>
           <td><a href={repo.html_url}>{repo.name}</a></td>

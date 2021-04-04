@@ -27,14 +27,19 @@ mongoose.connect('mongodb://localhost:1128/repos', {
   useUnifiedTopology:true
 });
 
-let save = ((userRepo) => {
-     Repo.create(userRepo)
-    .then((response) => {
-      console.log('REPOS ADDED TO THE DATABASE')
-    })
-    .catch((err) => {
-      console.log('DUPLICATE ENTRY TO THE DATABASE')
-    })
+let save = ((userRepos) => {
+  return Repo.insertMany(userRepos)
+  .then((response) => {
+    console.log('REPOS ADDED TO THE DATABASE')
+  })
+  .catch((err) => {
+    console.log('DUPLICATE ENTRY TO THE DATABASE')
+  })
+
+  // for (let i = 0; i < userRepos.length; i++) {
+  //   Repo.create(userRepos[i])
+  // }
+  // console.log('SAVE LOOP ENDED')
 })
 
 
