@@ -23,7 +23,7 @@ app.post('/repos', function (req, res) {
   .then(data => {
     return new Promise((resolve, reject) => {
        resolve(db.save(data));
-    })
+   })
   })
   .then(() => {
       return db.find()

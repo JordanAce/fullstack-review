@@ -6,7 +6,10 @@ mongoose.connect('mongodb://localhost/repos');
 
 let repoSchema = new mongoose.Schema({
   // TODO: your schema here!
-  id: {type : Number, unique: true},
+  id: {
+    type: Number,
+    unique: true
+  },
   name: String,
   full_name: String,
   owner: Object,

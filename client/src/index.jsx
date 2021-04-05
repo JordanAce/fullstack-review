@@ -40,9 +40,7 @@ class App extends React.Component {
       url: ('/repos'),
       success: function(sortedRepos) {
         console.log('SORTED REPOS OBTAINED BY CLIENT:');
-        that.setState({
-          repos: sortedRepos
-        });
+
       },
       error: function() {
         console.log('ERROR GETTING TOP 25 REPOS')
