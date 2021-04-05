@@ -35,11 +35,6 @@ let save = ((userRepos) => {
   .catch((err) => {
     console.log('DUPLICATE ENTRY TO THE DATABASE')
   })
-
-  // for (let i = 0; i < userRepos.length; i++) {
-  //   Repo.create(userRepos[i])
-  // }
-  // console.log('SAVE LOOP ENDED')
 })
 
 

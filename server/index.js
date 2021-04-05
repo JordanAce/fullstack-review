@@ -23,17 +23,13 @@ app.post('/repos', function (req, res) {
   .then(data => {
     return new Promise((resolve, reject) => {
        resolve(db.save(data));
-    // for (let i = 0; i < data.length; i++) {
-    //   resolve(db.save(data[i]));
-    //   console.log('DATA RECEIVED:', data[i].id)
     })
   })
   .then(() => {
-      console.log('CALLING DB FIND')
       return db.find()
   })
   .then((sortedRepos) => {
-    console.log('SORTED REPOS SENT BACK TO SERVER:', sortedRepos);
+    console.log('SORTED REPOS SENT BACK TO SERVER:');
     res.send(sortedRepos);
   })
   .catch(error => {

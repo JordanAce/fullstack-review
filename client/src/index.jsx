@@ -16,14 +16,12 @@ class App extends React.Component {
   search (handle) {
     let that = this;
     console.log(`${handle} was searched`);
-    //POST REQUEST TO /REPOS
     $.ajax({
       type: 'POST',
       url: ('/repos'),
       dataType: "json",
       data: handle,
       success: function(data) {
-        console.log(data);
         that.setState({
           repos: data
         });
@@ -41,7 +39,7 @@ class App extends React.Component {
       type: 'GET',
       url: ('/repos'),
       success: function(sortedRepos) {
-        console.log('SORTED REPOS OBTAINED BY CLIENT:', sortedRepos);
+        console.log('SORTED REPOS OBTAINED BY CLIENT:');
         that.setState({
           repos: sortedRepos
         });
